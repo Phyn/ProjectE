@@ -5,19 +5,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moze_intel.projecte.PECore;
 import moze_intel.projecte.config.ProjectEConfig;
-import moze_intel.projecte.gameObjs.blocks.AlchemicalChest;
-import moze_intel.projecte.gameObjs.blocks.Collector;
-import moze_intel.projecte.gameObjs.blocks.Condenser;
-import moze_intel.projecte.gameObjs.blocks.CondenserMK2;
-import moze_intel.projecte.gameObjs.blocks.FuelBlock;
-import moze_intel.projecte.gameObjs.blocks.InterdictionTorch;
-import moze_intel.projecte.gameObjs.blocks.MatterBlock;
-import moze_intel.projecte.gameObjs.blocks.MatterFurnace;
-import moze_intel.projecte.gameObjs.blocks.NovaCataclysm;
-import moze_intel.projecte.gameObjs.blocks.NovaCatalyst;
-import moze_intel.projecte.gameObjs.blocks.Pedestal;
-import moze_intel.projecte.gameObjs.blocks.Relay;
-import moze_intel.projecte.gameObjs.blocks.TransmutationStone;
+import moze_intel.projecte.gameObjs.blocks.*;
 import moze_intel.projecte.gameObjs.customRecipes.RecipesAlchemyBags;
 import moze_intel.projecte.gameObjs.customRecipes.RecipesCovalenceRepair;
 import moze_intel.projecte.gameObjs.customRecipes.RecipesKleinStars;
@@ -52,15 +40,7 @@ import moze_intel.projecte.gameObjs.items.VolcaniteAmulet;
 import moze_intel.projecte.gameObjs.items.armor.DMArmor;
 import moze_intel.projecte.gameObjs.items.armor.GemArmor;
 import moze_intel.projecte.gameObjs.items.armor.RMArmor;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemAlchemyChestBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemCollectorBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemCondenserBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemDMFurnaceBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemFuelBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemMatterBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemRMFurnaceBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemRelayBlock;
-import moze_intel.projecte.gameObjs.items.itemBlocks.ItemTransmutationBlock;
+import moze_intel.projecte.gameObjs.items.itemBlocks.*;
 import moze_intel.projecte.gameObjs.items.itemEntities.LavaOrb;
 import moze_intel.projecte.gameObjs.items.itemEntities.LensExplosive;
 import moze_intel.projecte.gameObjs.items.itemEntities.LootBallItem;
@@ -93,20 +73,7 @@ import moze_intel.projecte.gameObjs.items.tools.RedShears;
 import moze_intel.projecte.gameObjs.items.tools.RedShovel;
 import moze_intel.projecte.gameObjs.items.tools.RedStar;
 import moze_intel.projecte.gameObjs.items.tools.RedSword;
-import moze_intel.projecte.gameObjs.tiles.AlchChestTile;
-import moze_intel.projecte.gameObjs.tiles.CollectorMK1Tile;
-import moze_intel.projecte.gameObjs.tiles.CollectorMK2Tile;
-import moze_intel.projecte.gameObjs.tiles.CollectorMK3Tile;
-import moze_intel.projecte.gameObjs.tiles.CondenserMK2Tile;
-import moze_intel.projecte.gameObjs.tiles.CondenserTile;
-import moze_intel.projecte.gameObjs.tiles.DMFurnaceTile;
-import moze_intel.projecte.gameObjs.tiles.DMPedestalTile;
-import moze_intel.projecte.gameObjs.tiles.InterdictionTile;
-import moze_intel.projecte.gameObjs.tiles.RMFurnaceTile;
-import moze_intel.projecte.gameObjs.tiles.RelayMK1Tile;
-import moze_intel.projecte.gameObjs.tiles.RelayMK2Tile;
-import moze_intel.projecte.gameObjs.tiles.RelayMK3Tile;
-import moze_intel.projecte.gameObjs.tiles.TransmuteTile;
+import moze_intel.projecte.gameObjs.tiles.*;
 import moze_intel.projecte.utils.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -127,6 +94,7 @@ public class ObjHandler
 {
 	public static final CreativeTabs cTab = new CreativeTab();
 	public static Block alchChest = new AlchemicalChest();
+	public static Block alchTank = new AlchemicalTank();
 	public static Block confuseTorch = new InterdictionTorch();
 	public static Block transmuteStone = new TransmutationStone();
 	public static Block condenser = new Condenser();
@@ -228,6 +196,7 @@ public class ObjHandler
 	{
 		//Blocks
 		GameRegistry.registerBlock(alchChest, ItemAlchemyChestBlock.class, "Alchemical Chest");
+		GameRegistry.registerBlock(alchTank, ItemAlchemyTankBlock.class, "Alchemical Tank");
 		GameRegistry.registerBlock(confuseTorch, "Interdiction Torch");
 		GameRegistry.registerBlock(transmuteStone, ItemTransmutationBlock.class, "Transmutation Stone");
 		GameRegistry.registerBlock(condenser, ItemCondenserBlock.class, "Condenser");
@@ -328,6 +297,7 @@ public class ObjHandler
 		
 		//Tile Entities
 		GameRegistry.registerTileEntity(AlchChestTile.class, "Alchemical Chest Tile");
+		GameRegistry.registerTileEntity(AlchTankTile.class, "Alchemical Tank Tile");
 		GameRegistry.registerTileEntity(InterdictionTile.class, "Interdiction Torch Tile");
 		GameRegistry.registerTileEntity(CondenserTile.class, "Condenser Tile");
 		GameRegistry.registerTileEntity(CondenserMK2Tile.class, "Condenser MK2 Tile");
@@ -341,7 +311,7 @@ public class ObjHandler
 		GameRegistry.registerTileEntity(RelayMK3Tile.class, "AM Relay MK3 Tile");
 		GameRegistry.registerTileEntity(TransmuteTile.class, "Transmutation Tablet Tile");
 		GameRegistry.registerTileEntity(DMPedestalTile.class, "DM Pedestal Tile");
-		
+
 		//Entities
 		EntityRegistry.registerModEntity(EntityWaterProjectile.class, "Water Water", 1, PECore.instance, 256, 10, true);
 		EntityRegistry.registerModEntity(EntityLavaProjectile.class, "Lava Orb", 2, PECore.instance, 256, 10, true);
